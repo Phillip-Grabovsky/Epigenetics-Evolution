@@ -2,26 +2,20 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Main{
-  //CONSTANTS
-  private static int secondsToFood = 50; //amount of seconds until food is given
-  private static int totalTime = 100 //time in days until simulation ends
-  private static int startingBacteria = 2;
-  private static List culture = new ArrayList()<Bacterium>;
-  private static int totalSeconds = totalTime * secondsToFood;
-
+  public static List culture = new ArrayList()<Bacterium>;
 
 
   public static main(String[] args){
     //INITIALIZE CULUTRE
-    for(int i = 0; i < startingBacteria; i++){
+    for(int i = 0; i < CONSTANTS.startingBacteria; i++){
       culture.add(new Bacterium(startingEnergy));
     }
 
 
     //RUN SIMULATION
-    for(int t = 0; t < totalSeconds; t++){
+    for(int t = 0; t < CONSTANTS.totalSeconds; t++){
       updateBacteria(t%50);
-      if(t % secondsToFood == 0){
+      if(t % CONSTANTS.secondsToFoodFood == 0){
         addFood();
         replicate();
       }
@@ -30,7 +24,7 @@ public class Main{
 
   public static updateBacteria(int t){
     for(Bacterium b : culture){
-      b.transcribe();
+      b.transcribe(t);
     }
   }
 
