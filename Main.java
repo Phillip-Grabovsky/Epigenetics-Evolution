@@ -16,10 +16,13 @@ public class Main{
     //RUN SIMULATION
     for(int t = 0; t < CONSTANTS.totalSeconds; t++){
       updateBacteria(t%50);
-      if(t % CONSTANTS.secondsToFood == 1){
+      if(t % CONSTANTS.secondsToFood == 0){
         addFood();
         replicate();
         dailyUpdate(t);
+      }
+      if(culture.size() > 10000){
+        killHalf();
       }
     }
 
@@ -79,7 +82,7 @@ public class Main{
     //System.out.println("-=-=-=-=-=-genomes-=-=-=-=-=-=-=");
   }
 
-  /*public static void killHalf(){
+  public static void killHalf(){
     Random random = new Random();
     List<Bacterium> removeList = new ArrayList<Bacterium>();
     for(Bacterium b : culture){
@@ -91,6 +94,6 @@ public class Main{
     for(Bacterium b : removeList){
       culture.remove(b);
     }
-  }*/
+  }
 
 }
