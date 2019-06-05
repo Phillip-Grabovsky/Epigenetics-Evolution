@@ -35,12 +35,15 @@ public class Bacterium {
     if(baselineMutation){
       boolean plusMinus = myRandom.nextDouble() < 0.5;
       if(plusMinus){
-        genome[1] -= CONSTANTS.baselineMutationSize;
+        genome[0] -= CONSTANTS.baselineMutationSize;
       }
       else{
-        genome[1] += CONSTANTS.baselineMutationSize;
+        genome[0] += CONSTANTS.baselineMutationSize;
       }
     }
+
+    //set starting energy
+    energyLevel = CONSTANTS.startingEnergy;
   }
 
   public void transcribe(int t){
@@ -76,7 +79,7 @@ public class Bacterium {
 
   public void takeFood(){
     if(enzyme){
-      energyLevel += 50;
+      energyLevel += CONSTANTS.foodValue;
     }
   }
 
