@@ -5,11 +5,12 @@ import java.util.Random;
 
 public class Main{
   public static List<Bacterium> culture = new ArrayList<Bacterium>();
+  public static int seed = 0;
 
   public static void main(String[] args){
     //INITIALIZE CULUTRE
     for(int i = 0; i < CONSTANTS.startingBacteria; i++){
-      culture.add(new Bacterium(CONSTANTS.startingEnergy));
+      culture.add(new Bacterium(CONSTANTS.startingEnergy, i));
     }
 
 
@@ -59,10 +60,11 @@ public class Main{
     List<Bacterium> addList = new ArrayList<Bacterium>();
 
     for(Bacterium b : culture){
+      seed+=2;
       if(b.getEnergy() > CONSTANTS.replicationEnergy){
         //create 2 new bacteria descended from parent, kill parent.
-        addList.add(new Bacterium(b));
-        addList.add(new Bacterium(b));
+        addList.add(new Bacterium(b, seed));
+        addList.add(new Bacterium(b, seed+1));
         removeList.add(b);
       }
     }
@@ -79,7 +81,10 @@ public class Main{
   public static void dailyUpdate(int t){
     System.out.println("============UPDATE: Day " + t/50 + "============");
     System.out.println("Total Number: " + culture.size());
-    //System.out.println("-=-=-=-=-=-genomes-=-=-=-=-=-=-=");
+    System.out.println("-=-=-=-=-=-genomes-=-=-=-=-=-=-=");
+    for(Bacterium b : culture){
+      System.out.println(b.passDown()[0] + ", " + b.passDown()[1]);
+    }
   }
 
   public static void killHalf(){

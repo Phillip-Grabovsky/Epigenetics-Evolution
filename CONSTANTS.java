@@ -1,7 +1,7 @@
 public class CONSTANTS{
   //All Simulation Parameters are here.
   public static int secondsToFood = 50; //amount of seconds until food is given
-  public static int totalTime = 100; //time in days until simulation ends
+  public static int totalTime = 50; //time in days until simulation ends
   public static int startingEnergy = 100;
   public static int startingBacteria = 2; //number of starting bacteria
   public static int totalSeconds = totalTime * secondsToFood;
