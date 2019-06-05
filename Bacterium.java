@@ -52,7 +52,7 @@ public class Bacterium {
     double addedMethyl = t*genome[1];
     double totalMethyl = startingMethyl + addedMethyl;
 
-    double attachedMethyl;
+    int attachedMethyl;
     if(totalMethyl > CONSTANTS.numberOfBases) {
       attachedMethyl = CONSTANTS.numberOfBases;
     }
@@ -60,7 +60,7 @@ public class Bacterium {
       attachedMethyl = 0;
     }
     else{
-      attachedMethyl = totalMethyl;
+      attachedMethyl = (int)Math.round(totalMethyl);
     }
 
     double blockProbability = (attachedMethyl / CONSTANTS.numberOfBases);
