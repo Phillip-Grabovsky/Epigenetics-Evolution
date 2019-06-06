@@ -1,11 +1,8 @@
 import java.lang.Math;
-import java.util.Random;
 
 
 public class Bacterium {
   //private static Random theRandom = new Random();
-  private Random transcriber;
-  private Random mutator;
   private int energyLevel;
   private double[] genome = new double[2];
   // genome: 1st number is the base methylation
@@ -13,29 +10,22 @@ public class Bacterium {
   //           the  time of day to methylation.
   private boolean enzyme = true;
 
-  public Bacterium(int startingEnergy, int seed){
+  public Bacterium(int startingEnergy){
     energyLevel = startingEnergy;
     genome = new double[]{0,0};
-    transcriber = new Random(seed);
-    mutator = new Random(seed+11);
   }
 
-  public Bacterium(Bacterium Parent, int seed){
+  public Bacterium(Bacterium Parent){
     //inherit epigenetic system from parents
     genome = Parent.passDown();
-    transcriber = new Random(seed);
-    mutator = new Random(seed+11);
 
     //do some mutations to epigenetics
-    double sNumber = mutator.nextDouble();
-    double bNumber = mutator.nextDouble();
-    System.out.println(sNumber);
-    System.out.println(bNumber);
-    System.out.println("-----");
-    boolean signalMutation =  sNumber < CONSTANTS.sMutationChance;
-    boolean baselineMutation = bNumber < CONSTANTS.bMutationChance;
+    double s = CONSTANTS.random();
+    double b = CONSTANTS.random();
+    boolean signalMutation =  s < CONSTANTS.sMutationChance;
+    boolean baselineMutation = b < CONSTANTS.bMutationChance;
     if(signalMutation){
-      boolean plusMinus = mutator.nextDouble() < 0.5;
+      boolean plusMinus = CONSTANTS.random() < 0.5;
       if(plusMinus){
         genome[1] -= CONSTANTS.signalMutationSize;
       }
@@ -45,7 +35,7 @@ public class Bacterium {
     }
 
     if(baselineMutation){
-      boolean plusMinus = mutator.nextDouble() < 0.5;
+      boolean plusMinus = CONSTANTS.random() < 0.5;
       if(plusMinus){
         genome[0] -= CONSTANTS.baselineMutationSize;
       }
@@ -77,7 +67,7 @@ public class Bacterium {
 
     double blockProbability = (attachedMethyl / CONSTANTS.numberOfBases);
     double transcribeProbability = 1 - blockProbability;
-    boolean transcribe = transcriber.nextDouble() < transcribeProbability;
+    boolean transcribe = CONSTANTS.random() < transcribeProbability;
 
     if(transcribe){
       energyLevel -= CONSTANTS.enzymeCost;
@@ -95,7 +85,7 @@ public class Bacterium {
   }
 
   public double[] passDown(){
-    return genome;
+    return new double[]{genome[0], genome[1]};
   }
 
   public int getEnergy(){
