@@ -54,18 +54,7 @@ public class Bacterium {
     double addedMethyl = t*genome[1];
     double totalMethyl = startingMethyl + addedMethyl;
 
-    int attachedMethyl;
-    if(totalMethyl > CONSTANTS.numberOfBases) {
-      attachedMethyl = CONSTANTS.numberOfBases;
-    }
-    else if(totalMethyl < 0){
-      attachedMethyl = 0;
-    }
-    else{
-      attachedMethyl = (int)Math.round(totalMethyl);
-    }
-
-    double blockProbability = (attachedMethyl / CONSTANTS.numberOfBases);
+    double blockProbability = (totalMethyl / CONSTANTS.numberOfBases);
     double transcribeProbability = 1 - blockProbability;
     boolean transcribe = CONSTANTS.random() < transcribeProbability;
 

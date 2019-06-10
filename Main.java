@@ -2,6 +2,9 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.io.DataOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class Main{
   public static List<Bacterium> culture = new ArrayList<Bacterium>();
@@ -22,12 +25,28 @@ public class Main{
         replicate();
         dailyUpdate(t);
       }
-      if(culture.size() > 20000){
+      if(culture.size() > 10000){
         killHalf();
       }
     }
 
     //DISPLAY GENOME DISTRIBUTIONS
+    String newLine = System.getProperty("line.separator");
+    try {
+  		FileOutputStream fos = new FileOutputStream("C:\\Users\\bob\\Documents\\GitHub\\Epigenetics-Evolution\\"  + CONSTANTS.fileName + ".txt");
+  		DataOutputStream dos = new DataOutputStream(fos);
+  		for(Bacterium b : culture){
+  				dos.writeUTF(Double.toString(b.passDown()[0]));
+  				dos.writeUTF(", ");
+          dos.writeUTF(Double.toString(b.passDown()[1]));
+          dos.writeUTF("\n");
+  			}
+  		dos.close();
+  	}
+		catch (IOException e) {
+			System.out.println("IOException : " + e);
+		}
+
     for(Bacterium b : culture){
       System.out.println(b.passDown()[0] + ", " + b.passDown()[1]);
     }
