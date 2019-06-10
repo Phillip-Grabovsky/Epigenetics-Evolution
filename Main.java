@@ -22,7 +22,7 @@ public class Main{
         replicate();
         dailyUpdate(t);
       }
-      if(culture.size() > 10000){
+      if(culture.size() > 20000){
         killHalf();
       }
     }
@@ -81,7 +81,6 @@ public class Main{
   public static void dailyUpdate(int t){
     System.out.println("============UPDATE: Day " + t/50 + "============");
     System.out.println("Total Number: " + culture.size());
-    System.out.println("-=-=-=-=-=-genomes-=-=-=-=-=-=-=");
     /*for(Bacterium b : culture){
       System.out.println(b.passDown()[0] + ", " + b.passDown()[1]);
     }*/

@@ -13,9 +13,9 @@ public class CONSTANTS{
   public static double signalMutationSize  = 1; //size of a mutation in the signalling pathway
   public static double baselineMutationSize = 1; //size of a mutation in base methyl production.
   public static int numberOfBases = 100; //number of methylatable bases in genome for enzyme.
-  public static int replicationEnergy = 120; //energy level needed to replicate
+  public static int replicationEnergy = 1100; //energy level needed to replicate
   public static Random theRandom = new Random(600);
-  public static int giveFoodAtTime = 49; //ranges from 0 to the value of
+  public static int giveFoodAtTime = 0; //ranges from 0 to the value of
 
   //time in days until simulation ends
   public static int totalTime = (replicationEnergy - startingEnergy)/(foodValue - secondsInDay*enzymeCost)*1000;
